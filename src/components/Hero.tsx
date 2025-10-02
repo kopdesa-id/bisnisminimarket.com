@@ -3,8 +3,8 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import heroImage from "@/assets/hero-minimarket.jpg";
 
 const Hero = () => {
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  const handleWhatsAppClick = () => {
+    window.open("https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20konsultasi%20tentang%20bisnis%20minimarket", "_blank");
   };
 
   return (
@@ -37,11 +37,11 @@ const Hero = () => {
             <Button 
               size="lg" 
               variant="hero"
-              onClick={scrollToContact}
+              onClick={handleWhatsAppClick}
               className="text-base md:text-lg px-8 py-6"
             >
               Mulai Konsultasi Gratis
-              <ArrowRight className="ml-2" />
+              <MessageCircle className="ml-2" />
             </Button>
           </div>
         </div>

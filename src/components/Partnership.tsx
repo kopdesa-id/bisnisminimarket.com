@@ -11,8 +11,8 @@ const benefits = [
 ];
 
 const Partnership = () => {
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  const handleWhatsAppClick = () => {
+    window.open("https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20jadi%20mitra%20minimarket", "_blank");
   };
 
   return (
@@ -44,7 +44,7 @@ const Partnership = () => {
           <Button 
             size="lg" 
             variant="hero"
-            onClick={scrollToContact}
+            onClick={handleWhatsAppClick}
             className="text-base md:text-lg px-8 py-6"
           >
             Saya Tertarik Jadi Mitra
