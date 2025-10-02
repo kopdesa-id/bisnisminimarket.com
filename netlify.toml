@@ -1,0 +1,93 @@
+[build]
+  # Direktori output build
+  publish = "dist"
+  
+  # Command untuk build menggunakan Bun
+  command = "bun run build"
+  
+  # Direktori base (opsional, default adalah root)
+  base = "."
+
+[build.environment]
+  # Versi Node.js yang kompatibel dengan Bun
+  NODE_VERSION = "18"
+  
+  # Menggunakan Bun sebagai package manager
+  NPM_FLAGS = "--version"
+  
+  # Environment variables untuk production
+  NODE_ENV = "production"
+
+# Konfigurasi untuk SPA (Single Page Application)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers untuk optimasi performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache untuk file JS dan CSS
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Konfigurasi untuk file images
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Build plugins untuk optimasi
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+# Konfigurasi untuk preview deployments
+[context.deploy-preview]
+  command = "bun run build"
+
+[context.branch-deploy]
+  command = "bun run build"
+
+# Development context
+[context.dev]
+  command = "bun run build:dev"
