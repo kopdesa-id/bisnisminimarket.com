@@ -2,21 +2,21 @@
   # Direktori output build
   publish = "dist"
   
-  # Command untuk build menggunakan Bun
-  command = "bun run build"
+  # Command untuk build - menggunakan script yang memastikan dependencies terinstall
+  command = "npm ci --production=false && npm run build"
   
   # Direktori base (opsional, default adalah root)
   base = "."
 
 [build.environment]
-  # Versi Node.js yang kompatibel dengan Bun
+  # Versi Node.js yang kompatibel
   NODE_VERSION = "18"
-  
-  # Menggunakan Bun sebagai package manager
-  NPM_FLAGS = "--version"
   
   # Environment variables untuk production
   NODE_ENV = "production"
+  
+  # Menggunakan npm untuk install dependencies
+  NPM_FLAGS = "--production=false"
 
 # Konfigurasi untuk SPA (Single Page Application)
 [[redirects]]
@@ -83,11 +83,15 @@
 
 # Konfigurasi untuk preview deployments
 [context.deploy-preview]
-  command = "bun run build"
+  command = "npm ci --production=false && npm run build"
 
 [context.branch-deploy]
-  command = "bun run build"
+  command = "npm ci --production=false && npm run build"
 
 # Development context
 [context.dev]
-  command = "bun run build:dev"
+  command = "npm ci --production=false && npm run build:dev"
+
+# Production context
+[context.production]
+  command = "npm ci --production=false && npm run build"
